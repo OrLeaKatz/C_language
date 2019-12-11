@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void func()
+{
+	char* Stack;
+	//char str[] = "{(()}}[]";
+	//char str[] = "{(())}";
+	//char str[] = "[(())]";
+	//char str[] = "{(())]";
+	char str[] = "{((()))}[](){}";
+	//char str[] = "{([]))}";
+
+	int i = 0, size = 0, flag = 1;
+
+	Stack = (char*)malloc(sizeof(int));
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '(' || str[i] == '{' || str[i] == '[')
+		{
+			size++;
+			Stack = (char*)realloc(Stack, size * sizeof(int));
+			Stack[size - 1] = str[i];
+		}
+		else
+		{
+			if (size > 0)
+			{
+				if (str[i] == '}')
+				{
+					if (Stack[size - 1] == '{')
+					{
+						size--;
+						Stack = (char*)realloc(Stack, size * sizeof(int));
+					}
+				}
+				else
+					if (str[i] == ')')
+					{
+						if (Stack[size - 1] == '(')
+						{
+							size--;
+							Stack = (char*)realloc(Stack, size * sizeof(int));
+						}
+					}
+					else
+						if (str[i] == ']')
+						{
+							if (Stack[size - 1] == '[')
+							{
+								size--;
+								Stack = (char*)realloc(Stack, size * sizeof(int));
+							}
+						}
+			}
+			else
+			{
+				flag = 0;
+			}
+		}
+		i++;
+	}
+	printf("size = %d \n", size);
+	if (size == 0 && flag)
+		printf("good ! \n");
+	else
+		printf("bad ! \n");
+}
+
+int main()
+{
+
+	func();
+	return 0;
+}
