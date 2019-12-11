@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 4
+#define M 8
+
+int maxRec(int arr[], int len)
+{
+	int max;
+	// if the length is 0 the array is been traverse.
+	if (len == 1)
+		return arr[0];
+	max = maxRec(arr + 1, len - 1);
+	if (max > arr[0])
+		return max;
+	return arr[0];
+}
+
+int maxRow(int arr[][N], int L)
+{
+	int i, j, max = 0, row = 0, sumRow = 0;
+
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N; j++)
+		{
+			while (arr[i][j])
+			{
+				sumRow += arr[i][j] % 10;
+				arr[i][j] /= 10;
+			}
+		}
+		if (sumRow > max)
+		{
+			max = sumRow;
+			row = i;
+		}
+		sumRow = 0;
+	}
+	return row;
+}
+void main()
+{
+	int mat1[M] = { 12,5,99,45,125,5,78,9 };
+	int mat2[N][N] = { {12,23,34,45},
+					   {1,2,3,4},
+					   {123,3,34,46},
+					   {1,1,1,1} };
+
+	printf("The mat max number is: %d\n", maxRec(mat1, M));
+	printf("The mat max row is: %d\n", maxRow(mat2, N));
+	getchar();
+}
+
+

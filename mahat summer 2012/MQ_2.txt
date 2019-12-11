@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 20
+
+int diff_str(char* s, char* t)
+{
+	int cnt = 0;
+
+	while (*s == *t)
+	{
+		if (*s == *t)
+		{
+			s++;
+			t++;
+		}
+		else {
+
+			cnt++;
+			t++;
+		}
+	}
+
+	if (*s != '\0')return -1;
+	
+	if (*s == '\0')
+	{
+		while (*t)
+		{
+			cnt++;
+			t++;
+		}
+	}
+	return cnt;
+}
+
+void main()
+{
+	char ss[N],tt[N];
+	puts("enter 2 string (STOP to quit)");
+	gets_s(ss);
+	gets_s(tt);
+	while (strcmp(ss, "stop"), strcmp(tt, "stop"))
+	{
+		printf("\n %s %s %d\n",ss,tt,diff_str(ss,tt));
+		puts("Enter the next 2 strings (STOP to quit)");
+		gets_s(ss);
+		gets_s(tt);
+	}
+}
