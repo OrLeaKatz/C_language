@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//this func create the polindrime with the char 
+void func(char ch)
+{
+	int i;
+
+	for (i ='a'; i < ch; i++)
+	{
+		printf("%c", i);
+	}
+
+	for (i = ch; i >= 'a'; i--)
+	{
+		printf("%c", i);
+	}
+	printf("\n");
+}
+
+int main()
+{
+	char ch;
+	int i, j;
+
+	printf("Please enter your char in a - z ");
+	scanf_s("%c", &ch);
+
+	if (ch < 'a' || ch > 'z')
+	{
+		printf("Sorry this is invalid character ");
+	}
+	//create the polidrome char with the spaces.
+	for (i = 'a'; i <= ch; i++)
+	{
+		for (j = 0; j < ch - i; j++)
+		{
+			printf(" ");
+		}
+		func(i);
+	}
+	return 0;
+}
