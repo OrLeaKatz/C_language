@@ -1,0 +1,51 @@
+question 2 - mahat 2020.
+
+-------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// cheak lower letters in the string
+int cheak_lower(char* input)
+{
+	int i;
+
+	for (i = 0; i < strlen(input); i++)
+	{
+		if (input[i] >= 'a' && input[i] <= 'z')
+			return 1;
+		else
+			return 0;
+	}
+
+}
+
+int *func(char* input, int* size)
+{
+	if (!(cheak_lower))// if its not lower case 
+		return 0;
+	else 
+	{
+		int *size_s = (int*)malloc(sizeof * input); // allocate the memory size of the size array as the size of input (string) array.
+		int i;
+
+		for (i = 0; i < strlen(input); i++)
+		{
+			*size_s = input[i] - input[i+1]; //one character in input array to the second array.
+			printf("%d ,", *size_s);
+		}	
+		return size_s;
+	}	
+}
+
+int main()
+{
+	int i;
+	char string_word[] = "questiontwo";
+	int* temp1 = NULL;
+	int* string_size = (int*)malloc(sizeof * (string_word));
+
+	int* string = func(string_word,string_size);
+
+	return 0;
+}
