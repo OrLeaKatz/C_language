@@ -1,0 +1,111 @@
+mahat 2013 summer
+--------------------
+#include <stdio.h>
+#include <conio.h>
+#define SIZE1 3
+#define SIZE2 3
+
+typedef struct student {
+	int student_no;
+	char student_name[30];
+}student;
+
+typedef struct course {
+	int course_no;
+	char course_name[30];
+	int mark_demande;
+}course;
+
+student students[SIZE1];
+course courses[SIZE2];
+int mark[SIZE1][2];
+
+//get the student detail.
+void get_students_details()
+{
+	int i;
+
+	printf("Enter the students name, students No\n");
+	for (i = 0; i < SIZE1; i++)
+	{
+		printf("Enter student No: ");
+		scanf("%d",&students[i].student_no);
+		_flushall();
+		printf("Enter student name: ");
+		scanf("%s",students[i].student_name);
+	}
+
+	printf("Students reports:\n");
+	printf("Student No:\tstudent name:\n");
+	for (i = 0; i < SIZE1; i++)
+		printf("%d\t\t%s\n",students[i].student_no,students[i].student_name);
+}
+
+//get the student mark
+void get_student_mark()
+{
+	int i, j, avg_mark;
+
+	printf("Enter the AVG marks:\n");
+	for (i = 0; i < SIZE1; i++)
+		for (j = 0; j < 2; j += 2)
+		{
+			mark[i][j] = students[i].student_no;
+			printf("Enter the avg mark for student No: %d", students[i].student_no);
+			scanf("%d",&avg_mark);
+			mark[i][j + 1] = avg_mark;
+		}
+	printf("Students mark reports:\n");
+	printf("Students Number\tStudents mark\n");
+	for (i = 0; i < SIZE1; i++)
+		for (j = 0; j < 2; j += 2)
+			printf("%d\t\t%d\n",mark[i][j],mark[i][j + 1]);
+}
+
+//get course detail
+void get_course_detail()
+{
+	int i;
+	printf("\nEnter course details:\n");
+	for (i = 0; i < SIZE2; i++)
+	{
+		printf("Enter the course No: ");
+		scanf("%d",&courses[i].course_no);
+		_flushall();
+		printf("Enter the course name: ");
+		scanf("%s",courses[i].course_name);
+		printf("Enter the demande course mark: ");
+		scanf("%d",&courses[i].mark_demande);
+	}
+	printf("Course reports:\n");
+	printf("Corses Num\tcourse Name:\tcourse Minimum Mark\n");
+	for (i = 0; i < SIZE2; i++)
+		printf("%d\t\t%s\t\t%d\n",courses[i].course_no,courses[i].course_name,courses[i].mark_demande);
+}
+
+int main()
+{
+	int i, j;
+
+	get_students_details();
+	get_student_mark();
+	get_course_detail();
+
+	for (i = 0; i < SIZE1; i++)
+		for (j = 0; j < SIZE2; j++)
+		{
+			if ((mark[i][1] >= courses[i].mark_demande) && (courses[i].course_no == 12))
+			{
+				if (mark[i][0] == students[i].student_no)
+					printf("The student %s can registrate\n", students[i].student_name);
+				break;
+			}
+			else
+			{
+				printf("No students were found for this course!!!\n");
+				break;
+			}
+		}
+	_getch();
+	return 0;
+}
